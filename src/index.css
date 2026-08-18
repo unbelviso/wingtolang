@@ -1,0 +1,171 @@
+@import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
+@import url('https://cdn.jsdelivr.net/gh/wanteddev/wanted-sans@v1.0.1/packages/wanted-sans/fonts/webfonts/variable/split/WantedSansVariable.min.css');
+@import "pretendard/dist/web/static/pretendard.css";
+@import "tailwindcss";
+
+@font-face {
+  font-family: 'SchoolSafetyPictureDiary';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-5@1.0/HakgyoansimGeurimilgiTTF-R.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@theme {
+  --color-wingto-cream: #F9E296;
+  --color-wingto-paper: #E7EDCC;
+  --color-wingto-sage: #87A98A;
+  --color-wingto-sage-dark: #52775C;
+  --color-wingto-moss: #3D5644;
+  --color-wingto-peach: #EE9C84;
+  --color-wingto-peach-dark: #D97D67;
+  --color-wingto-sky: #DCEEEF;
+  --color-wingto-sky-dark: #77B8C0;
+  --color-wingto-butter: #F5DC95;
+  --color-wingto-pink: #F9D9D3;
+  --color-wingto-text: #3D5644;
+  --font-hero: 'Jua', 'Wanted Sans Variable', 'Wanted Sans', 'Pretendard', sans-serif;
+  --font-title: 'Wanted Sans Variable', 'Wanted Sans', 'Pretendard', sans-serif;
+  --font-body: 'SchoolSafetyPictureDiary', 'Pretendard', sans-serif;
+}
+
+:root {
+  --forest-shadow: 0 18px 38px rgba(65, 88, 57, 0.17);
+  --forest-shadow-soft: 0 8px 20px rgba(65, 88, 57, 0.14);
+  --forest-border: rgba(82, 119, 78, 0.28);
+  --ease-forest: cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  font-family: var(--font-body);
+  color: var(--color-wingto-text);
+  background: var(--color-wingto-cream);
+}
+
+button,
+textarea,
+input {
+  font: inherit;
+}
+
+button:focus-visible,
+textarea:focus-visible,
+input:focus-visible {
+  outline: 3px solid rgba(119, 184, 192, 0.48);
+  outline-offset: 3px;
+}
+
+::selection {
+  background: rgba(238, 156, 132, 0.28);
+}
+
+.forest-card {
+  border: 1px solid var(--forest-border);
+  border-radius: 1.5rem;
+  background: var(--color-wingto-paper);
+  box-shadow: var(--forest-shadow-soft);
+}
+
+.forest-panel-title {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-family: var(--font-title);
+  font-size: 1.05rem;
+  color: var(--color-wingto-moss);
+}
+
+.forest-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  border-radius: 999px;
+  padding: 0.35rem 0.75rem;
+  background: rgba(135, 169, 138, 0.14);
+  color: var(--color-wingto-sage-dark);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.forest-leaf {
+  position: absolute;
+  display: block;
+  width: 1.1rem;
+  height: 0.64rem;
+  border-radius: 100% 0 100% 0;
+  background: var(--color-wingto-sage);
+  opacity: 0.72;
+  transform: rotate(-28deg);
+}
+
+.forest-leaf::after {
+  position: absolute;
+  top: 0.32rem;
+  left: 0.08rem;
+  width: 0.9rem;
+  height: 1px;
+  background: rgba(255,255,255,0.78);
+  content: '';
+  transform: rotate(-18deg);
+}
+
+.forest-flower {
+  position: absolute;
+  display: grid;
+  width: 1rem;
+  height: 1rem;
+  place-items: center;
+  color: var(--color-wingto-peach);
+  font-size: 1.25rem;
+  line-height: 1;
+}
+
+.forest-flower::before {
+  content: '✦';
+}
+
+.forest-scroll::-webkit-scrollbar {
+  height: 10px;
+}
+
+.forest-scroll::-webkit-scrollbar-track {
+  border-radius: 999px;
+  background: rgba(135, 169, 138, 0.12);
+}
+
+.forest-scroll::-webkit-scrollbar-thumb {
+  border: 3px solid transparent;
+  border-radius: 999px;
+  background: rgba(82, 119, 92, 0.48);
+  background-clip: padding-box;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .forest-lift {
+    transition: transform 180ms var(--ease-forest), box-shadow 180ms var(--ease-forest), background-color 180ms var(--ease-forest);
+  }
+
+  .forest-lift:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 13px 22px rgba(109, 85, 65, 0.18);
+  }
+
+  .forest-lift:active:not(:disabled) {
+    transform: translateY(0) scale(0.97);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
