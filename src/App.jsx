@@ -53,11 +53,7 @@ export default function App() {
       <main className="relative mx-auto max-w-3xl px-4 pb-12 sm:px-6 sm:pb-16" aria-label="윙토언어 변환 도구">
         <Header />
         <div className="flex flex-col gap-4 sm:gap-5">
-          <TextInput
-            value={draft}
-            onChange={setDraft}
-            recommendedSyllables={recommendedSyllables}
-          />
+          <TextInput value={draft} onChange={setDraft} />
 
           <BackgroundSettings
             background={background}
@@ -109,7 +105,7 @@ export default function App() {
         </div>
       </main>
 
-      <footer className="relative border-t border-wingto-sage/15 bg-wingto-sage/10 px-4 py-7 text-center text-xs leading-6 text-wingto-moss/72 sm:py-8">
+      <footer className="relative border-t border-wingto-sage/15 bg-wingto-sage/10 px-4 py-7 text-center text-xs leading-6 text-wingto-moss/90 sm:py-8">
         <span className="forest-leaf left-[10%] top-5 hidden scale-75 opacity-45 sm:block" aria-hidden="true" />
         <span className="forest-leaf right-[11%] top-8 hidden scale-75 rotate-[55deg] bg-wingto-sky-dark opacity-45 sm:block" aria-hidden="true" />
         <p>이곳은 윙토언어 팬 사이트로, 원작자 홍학순 작가님이 응원해주십니다.</p>

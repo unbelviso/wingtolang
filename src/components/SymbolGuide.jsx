@@ -14,7 +14,7 @@ export function SymbolGuide({ strokeColor, fillConsonants, consonantFillColor })
           <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-wingto-sky text-xs font-bold text-wingto-sage-dark" aria-hidden="true">ㄱ</span>
           자모 대응표
         </h2>
-        <p className="mt-1 text-xs text-wingto-moss/76">한글 자모와 윙토언어 기호의 대응을 확인할 수 있어요.</p>
+        <p className="mt-1 text-xs text-wingto-moss/90">한글 자모와 윙토언어 기호의 대응을 확인할 수 있어요.</p>
       </div>
 
       <div className="p-4 sm:p-5">

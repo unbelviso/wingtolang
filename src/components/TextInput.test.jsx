@@ -10,10 +10,9 @@ describe('TextInput', () => {
     expect(screen.getByPlaceholderText('윙토언어로 전하고 싶은 말을 입력해주세요.')).toBeInTheDocument();
   });
 
-  it('shows the current count and configured automatic wrap guidance', () => {
-    render(<TextInput value="안녕하세요" onChange={() => {}} recommendedSyllables={7} />);
+  it('shows the current character count', () => {
+    render(<TextInput value="안녕하세요" onChange={() => {}} />);
     expect(screen.getByText('5자 입력됨')).toBeInTheDocument();
-    expect(screen.getByText('한 줄에 약 7글자씩 보여요')).toBeInTheDocument();
   });
 
   it('keeps the inline help collapsed until the user opens it', async () => {

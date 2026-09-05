@@ -111,7 +111,7 @@ function RangeControl({ label, value, min, max, step, suffix, onChange, helpText
         aria-label={label}
         className="mt-2 h-2 w-full cursor-pointer accent-wingto-sage-dark"
       />
-      {helpText && <p className="mt-2 text-[10px] leading-4 text-wingto-moss/72">{helpText}</p>}
+      {helpText && <p className="mt-2 text-[10px] leading-4 text-wingto-moss/90">{helpText}</p>}
     </div>
   );
 }
@@ -149,7 +149,7 @@ export function BackgroundSettings({
         <span className="inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-wingto-sky text-xs font-bold text-wingto-sage-dark" aria-hidden="true">2</span>
         <div>
           <h2 id="settings-title" className="forest-panel-title">꾸미기 설정</h2>
-          <p className="mt-1 text-xs leading-5 text-wingto-moss/76">배경, 기호 색, 자음 내부 채움을 골라 결과를 꾸며요.</p>
+          <p className="mt-1 text-xs leading-5 text-wingto-moss/90">배경, 기호 색, 자음 내부 채움을 골라 결과를 꾸며요.</p>
         </div>
       </div>
 
@@ -159,32 +159,39 @@ export function BackgroundSettings({
           <div className="flex flex-wrap gap-2.5">
             {Object.entries(BACKGROUND_STYLES).map(([id, style]) => (
               <div key={id} className="flex flex-col items-center gap-1">
-                <SwatchButton
-                  label={style.label}
-                  selected={background === id}
-                  onClick={() => onBackgroundChange(id)}
-                  style={id === 'custom' ? { backgroundColor: customBackgroundColor } : (style.preview ? { backgroundColor: style.preview } : TRANSPARENT_SWATCH_STYLE)}
-                />
-                <span className="text-[10px] font-medium text-wingto-moss/76">{style.label}</span>
+                {id === 'custom' ? (
+                  <div className={`relative rounded-full transition-transform ${background === 'custom' ? 'scale-110 ring-2 ring-wingto-sage/25' : 'hover:scale-105'}`}>
+                    <input
+                      type="color"
+                      value={customBackgroundColor}
+                      onClick={() => onBackgroundChange('custom')}
+                      onChange={(event) => {
+                        onCustomBackgroundColorChange(event.target.value);
+                        onBackgroundChange('custom');
+                      }}
+                      aria-label="직접 색 배경 — 색을 골라 배경으로 적용해요"
+                      aria-pressed={background === 'custom'}
+                      className={`h-9 w-9 cursor-pointer rounded-full border-2 bg-transparent p-0.5 shadow-sm ${background === 'custom' ? 'border-wingto-sage-dark' : 'border-white'}`}
+                    />
+                    {background === 'custom' && (
+                      <span className="pointer-events-none absolute inset-0 grid place-items-center text-sm font-black text-wingto-moss drop-shadow-sm" aria-hidden="true">✓</span>
+                    )}
+                  </div>
+                ) : (
+                  <SwatchButton
+                    label={style.label}
+                    selected={background === id}
+                    onClick={() => onBackgroundChange(id)}
+                    style={style.preview ? { backgroundColor: style.preview } : TRANSPARENT_SWATCH_STYLE}
+                  />
+                )}
+                <span className="text-[10px] font-medium text-wingto-moss/90">{style.label}</span>
               </div>
             ))}
           </div>
-          <label className={`mt-3 flex max-w-xs items-center justify-between gap-3 rounded-xl border px-3 py-2 ${background === 'custom' ? 'border-wingto-sage-dark bg-wingto-cream/55' : 'border-[#A8872A]/25 bg-white/35'}`}>
-            <span>
-              <span className="block text-xs font-bold text-wingto-moss">배경색 선택</span>
-              <span className="mt-0.5 block text-[11px] text-wingto-moss/72">선택하면 PNG에도 같은 색으로 저장돼요.</span>
-            </span>
-            <input
-              type="color"
-              value={customBackgroundColor}
-              onChange={(event) => {
-                onCustomBackgroundColorChange(event.target.value);
-                onBackgroundChange('custom');
-              }}
-              aria-label="배경색 선택"
-              className="h-9 w-9 cursor-pointer rounded-full border-2 border-white bg-transparent p-0.5 shadow-sm"
-            />
-          </label>
+          <p className="mt-2 text-[11px] leading-4 text-wingto-moss/90">
+            '직접 색'을 누르면 원하는 색을 골라 배경으로 쓸 수 있어요. 고른 색은 PNG에도 그대로 저장돼요.
+          </p>
         </fieldset>
 
         <div className="space-y-4 border-t border-[#A8872A]/20 pt-4 sm:border-l sm:border-t-0 sm:pl-5 sm:pt-0">
@@ -208,7 +215,7 @@ export function BackgroundSettings({
           <label className="flex items-center justify-between gap-3">
             <span>
               <span className="block text-sm font-bold text-wingto-moss">윙토언어 색 선택</span>
-              <span className="mt-0.5 block text-xs text-wingto-moss/72">선의 색상을 변경해요.</span>
+              <span className="mt-0.5 block text-xs text-wingto-moss/90">선의 색상을 변경해요.</span>
             </span>
             <input
               type="color"
@@ -223,7 +230,7 @@ export function BackgroundSettings({
 
       <fieldset className="mt-5 border-t border-[#A8872A]/20 pt-4">
         <legend className="text-sm font-bold text-wingto-moss">윙토언어 모양 조절</legend>
-        <p className="mt-1 text-xs leading-5 text-wingto-moss/72">윙토언어의 스타일을 변경할 수 있어요.</p>
+        <p className="mt-1 text-xs leading-5 text-wingto-moss/90">윙토언어의 스타일을 변경할 수 있어요.</p>
         <div className="mt-3 grid gap-2.5 sm:grid-cols-2">
           <RangeControl
             label="윙토언어 크기"
@@ -269,14 +276,14 @@ export function BackgroundSettings({
             max="2400"
             step="20"
             onChange={onOutputWidthChange}
-            helpText={`현재 크기와 자간 기준으로 한 줄에 약 ${recommendedSyllables}글자가 들어가요. 더 길어지면 다음 줄로 이어져요.`}
+            helpText={`이 너비면 한 줄에 약 ${recommendedSyllables}글자가 보이고, 더 길어지면 다음 줄로 이어져요.`}
           />
         </div>
       </fieldset>
 
       <fieldset className="mt-5 border-t border-[#A8872A]/20 pt-4">
         <legend className="text-sm font-bold text-wingto-moss">자음 내부 채우기</legend>
-        <p className="mt-1 text-xs leading-5 text-wingto-moss/72">기본은 빈 형태예요. 채우면 ㅇ·ㅋ·ㅌ·ㅍ·ㅎ을 포함한 자음 본체에만 색이 들어가요.</p>
+        <p className="mt-1 text-xs leading-5 text-wingto-moss/90">기본은 빈 형태예요. 채우면 ㅇ·ㅋ·ㅌ·ㅍ·ㅎ을 포함한 자음 본체에만 색이 들어가요.</p>
         <div className="mt-3 flex flex-wrap gap-2">
           <ToggleButton selected={!fillConsonants} onClick={() => onFillConsonantsChange(false)}>비우기</ToggleButton>
           <ToggleButton selected={fillConsonants} onClick={() => onFillConsonantsChange(true)}>채우기</ToggleButton>
@@ -285,7 +292,7 @@ export function BackgroundSettings({
         {fillConsonants && (
           <div className="mt-3 flex flex-wrap items-end gap-3">
             <div>
-              <p className="mb-2 text-xs font-semibold text-wingto-moss/78">채움 색 팔레트</p>
+              <p className="mb-2 text-xs font-semibold text-wingto-moss/90">채움 색 팔레트</p>
               <div className="flex flex-wrap gap-2.5">
                 {CONSONANT_FILL_COLORS.map((color) => (
                   <SwatchButton

@@ -45,15 +45,12 @@ export function ResultCanvas({
 
   return (
     <section className="forest-card overflow-hidden" aria-labelledby="result-title">
-      <div className="flex items-start justify-between gap-4 border-b border-wingto-sage/30 bg-[#D6E1BE] px-4 py-4 sm:px-5">
-        <div className="flex items-start gap-3">
-          <span className="inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-wingto-butter text-xs font-bold text-wingto-sage-dark" aria-hidden="true">3</span>
-          <div>
-            <h2 id="result-title" className="forest-panel-title">번역 결과</h2>
-            <p className="mt-1 text-xs text-wingto-moss/76">투명 배경도 바로 확인하고 PNG로 저장할 수 있어요.</p>
-          </div>
+      <div className="flex items-start gap-3 border-b border-wingto-sage/30 bg-[#D6E1BE] px-4 py-4 sm:px-5">
+        <span className="inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-wingto-butter text-xs font-bold text-wingto-sage-dark" aria-hidden="true">3</span>
+        <div>
+          <h2 id="result-title" className="forest-panel-title">번역 결과</h2>
+          <p className="mt-1 text-xs text-wingto-moss/90">입력하면 바로 여기에 그려져요.</p>
         </div>
-        {text && <span className="rounded-full bg-white/65 px-2.5 py-1 text-[11px] font-semibold text-wingto-sage-dark">준비 완료</span>}
       </div>
 
       {text ? (
@@ -75,7 +72,7 @@ export function ResultCanvas({
               <span className="forest-leaf bottom-0 right-1 rotate-45" />
             </div>
             <p className="font-title text-lg text-wingto-moss">아직 빈 공간이에요.</p>
-            <p className="mt-2 text-sm leading-6 text-wingto-moss/76">입력창에 한글을 입력하면 바로 보여드릴게요.</p>
+            <p className="mt-2 text-sm leading-6 text-wingto-moss/90">입력창에 한글을 입력하면 바로 보여드릴게요.</p>
           </div>
         </div>
       )}
