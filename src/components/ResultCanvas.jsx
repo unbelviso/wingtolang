@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { renderToCanvas } from '../utils/renderToCanvas.js';
+import { DownloadButton } from './DownloadButton.jsx';
 import { GUIDE_RESULT_LAYOUT } from '../utils/vowelLayout.js';
 
 const TRANSPARENT_BACKDROP_STYLE = {
@@ -74,10 +75,14 @@ export function ResultCanvas({
               <span className="forest-leaf bottom-0 right-1 rotate-45" />
             </div>
             <p className="font-title text-lg text-wingto-moss">아직 빈 공간이에요.</p>
-            <p className="mt-2 text-sm leading-6 text-wingto-moss/76">입력창에 한글을 입력하고 '번역하기'를 눌러보세요.</p>
+            <p className="mt-2 text-sm leading-6 text-wingto-moss/76">입력창에 한글을 입력하면 바로 보여드릴게요.</p>
           </div>
         </div>
       )}
+
+      <div className="border-t border-wingto-sage/30 px-4 py-4 sm:px-5 sm:py-5">
+        <DownloadButton canvasRef={canvasRef} disabled={!text} />
+      </div>
     </section>
   );
 }

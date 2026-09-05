@@ -1,9 +1,7 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Header } from './components/Header.jsx';
 import { TextInput } from './components/TextInput.jsx';
-import { ConvertButton } from './components/ConvertButton.jsx';
 import { ResultCanvas } from './components/ResultCanvas.jsx';
-import { DownloadButton } from './components/DownloadButton.jsx';
 import { SymbolGuide } from './components/SymbolGuide.jsx';
 import { BackgroundSettings } from './components/BackgroundSettings.jsx';
 import { DEFAULT_BACKGROUND, TINT_COLORS } from './utils/backgroundStyles.js';
@@ -27,7 +25,6 @@ export default function App() {
   const [outputWidth, setOutputWidth] = useState(720);
   const [fillConsonants, setFillConsonants] = useState(false);
   const [consonantFillColor, setConsonantFillColor] = useState('#F9E296');
-  const [isConverting, setIsConverting] = useState(false);
   const canvasRef = useRef(null);
   const recommendedSyllables = estimateSyllablesPerLine(GUIDE_RESULT_LAYOUT, {
     symbolScale: symbolScale / 100,
@@ -35,12 +32,17 @@ export default function App() {
     outputWidth,
   });
 
-  function handleConvert() {
-    if (!draft.trim() || isConverting) return;
-    setText(draft);
-    setIsConverting(true);
-    window.setTimeout(() => setIsConverting(false), 380);
-  }
+  // Live preview: the input feeds the rendered text directly, with a short
+  // debounce so rapid typing doesn't re-run the canvas render on every keystroke.
+  // An empty input clears the result immediately, keeping the empty-space state.
+  useEffect(() => {
+    if (!draft.trim()) {
+      setText('');
+      return undefined;
+    }
+    const timer = window.setTimeout(() => setText(draft), 150);
+    return () => window.clearTimeout(timer);
+  }, [draft]);
 
   return (
     <div className="relative isolate min-h-screen overflow-hidden">
@@ -56,10 +58,6 @@ export default function App() {
             onChange={setDraft}
             recommendedSyllables={recommendedSyllables}
           />
-
-          <div className="flex flex-col items-center py-1">
-            <ConvertButton onClick={handleConvert} disabled={!draft.trim()} loading={isConverting} />
-          </div>
 
           <BackgroundSettings
             background={background}
@@ -102,10 +100,6 @@ export default function App() {
             fillConsonants={fillConsonants}
             consonantFillColor={consonantFillColor}
           />
-
-          <div className="forest-card flex justify-center px-4 py-4 sm:py-5">
-            <DownloadButton canvasRef={canvasRef} disabled={!text} />
-          </div>
 
           <SymbolGuide
             strokeColor={strokeColor}

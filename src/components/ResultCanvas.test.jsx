@@ -12,6 +12,11 @@ describe('ResultCanvas', () => {
     expect(screen.queryByTestId('result-canvas')).not.toBeInTheDocument();
   });
 
+  it('renders the PNG download button inside the card, disabled while empty', () => {
+    render(<ResultCanvas text="" canvasRef={createRef()} />);
+    expect(screen.getByRole('button', { name: 'PNG 다운로드' })).toBeDisabled();
+  });
+
   it('renders a canvas and calls renderToCanvas when text is present', async () => {
     const { renderToCanvas } = await import('../utils/renderToCanvas.js');
     render(<ResultCanvas text="안녕" canvasRef={createRef()} />);
